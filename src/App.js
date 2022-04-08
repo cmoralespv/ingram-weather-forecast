@@ -1,7 +1,7 @@
-import { atom, RecoilRoot, useRecoilValue, useRecoilState } from 'recoil'
+import { atom, useRecoilValue, useRecoilState } from 'recoil'
 import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from 'react-query'
-import ZipCodeInput from './ZipcodeInput.js'
-import Forecast from './Forecast.js'
+import ZipCodeInput from './components/ZipcodeInput.js'
+import Forecast from './components/Forecast.js'
 import './App.css'
 
 const queryClient = new QueryClient()
@@ -9,10 +9,8 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ZipCodeInput />
-        <Forecast />
-      </RecoilRoot>
+      <ZipCodeInput />
+      <Forecast />
     </QueryClientProvider>
   )
 }

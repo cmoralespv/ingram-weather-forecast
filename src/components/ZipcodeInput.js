@@ -1,7 +1,8 @@
 import { useRecoilState } from 'recoil'
 import { Box, Button, TextField } from '@mui/material'
+import {forecastState} from '../state/forecastState.js'
 import axios from 'axios'
-import './App.css'
+import '../App.css'
 
 const getForecast = async (zipcode) => {
 
@@ -27,18 +28,19 @@ const getForecast = async (zipcode) => {
     fiveDayForecast.push(currentDay)
   }
 
-  console.log(locationName)
-  console.log(fiveDayForecast)
-
+  return fiveDayForecast
 }
 
 function ZipcodeInput() {
 
-  let establishCity = (e) => {
+  const [forecast, setForecast] = useRecoilState(forecastState)
+
+  let establishCity = async (e) => {
     e.preventDefault()
     let zipcode = e.target.zipcode.value
     console.log('value: ', e.target.zipcode.value)
-    getForecast(zipcode)
+    let results = await getForecast(zipcode)
+    setForecast(results)
   }
 
   return (
