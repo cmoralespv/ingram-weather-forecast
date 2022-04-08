@@ -1,0 +1,21 @@
+.Input-section {
+  text-align: center;
+  background-color: #2668ec;
+}
+
+.Prompt {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  border-radius: 1;
+  color: white
+}
+
+.ZipcodeInput {
+  display: flex;
+  flex-direction: row;
+  padding: 1;
+  margin: 1;
+  background-color: #2668ec;
+  border-radius: 1;
+}

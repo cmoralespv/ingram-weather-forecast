@@ -2,7 +2,9 @@ import { useRecoilState } from 'recoil'
 import { Box, Button, TextField } from '@mui/material'
 import {forecastState} from '../state/forecastState.js'
 import axios from 'axios'
-import '../App.css'
+import './ZipcodeInput.css'
+
+let locationName = ''
 
 const getForecast = async (zipcode) => {
 
@@ -16,11 +18,13 @@ const getForecast = async (zipcode) => {
   let forecast = await axios.get(`${urlForecast}/${location.Key}?apikey=${process.env.REACT_APP_ACCUWEATHER_API_KEY}`)
     .then(response => { return response.data.DailyForecasts })
 
-  let locationName = location.EnglishName
+  locationName = location.EnglishName
 
   for (let day of forecast) {
     let currentDay = {}
-    currentDay.date = day.Date
+    let currentDate = new Date(day.Date)
+    currentDay.weekday = currentDate.toLocaleDateString('en-US', { weekday: 'long' })
+    currentDay.date = `${currentDate.toLocaleDateString('en-US', { month: 'long'})} ${currentDate.getDate()}`
     currentDay.high = day.Temperature.Maximum.Value
     currentDay.low = day.Temperature.Minimum.Value
     currentDay.day = day.Day.IconPhrase
@@ -38,15 +42,14 @@ function ZipcodeInput() {
   let establishCity = async (e) => {
     e.preventDefault()
     let zipcode = e.target.zipcode.value
-    console.log('value: ', e.target.zipcode.value)
     let results = await getForecast(zipcode)
     setForecast(results)
   }
 
   return (
 
-    <div className="App">
-      <h1 className="Label">Enter Zipcode to get Weather Forecast</h1>
+    <div className="Input-section">
+      <h1 className="Prompt">Enter Zipcode to get Weather Forecast</h1>
       <Box
         component="form"
         sx={{'& > :not(style)': { m: 1, width: '25ch' }}}
@@ -57,14 +60,19 @@ function ZipcodeInput() {
         <TextField
           id="zipcode"
           label="Zipcode"
+          sx={{ input: { color: 'white' } }}
           //pattern="[0-9]{5}"
           variant="outlined"
         />
         <Button
           type="submit"
-          variant="contained">
+          variant="contained"
+          color="secondary">
             Get Forecast
         </Button>
+      </Box>
+      <Box>
+        <h2>{locationName}</h2>
       </Box>
 
     </div>

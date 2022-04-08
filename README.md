@@ -1,4 +1,36 @@
-# Getting Started with Create React App
+# Ingram Weather Forecast Application
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
+![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
+Recoil - A state management library for React
+
+## Summary
+
+  Simple web application built as a demo for Ingram Micro and designed to retrieve a 5-day forecast from the accuweather API by inputting a US zipcode.
+
+## Getting Started
+
+1. Accuweather API Token
+```
+Duplicate .env.example file and remove .example
+Enter the API Token
+```
+2. NPM
+```
+npm start
+npm build
+```
+## Tech Debt
+
+[ ] Implement validation for valid zipcodes
+[ ] Incoroporate the use of React-Query into project and optimize queries
+[ ] Improve Styling
+[ ] Use icons for weather forecast
+[ ] Increment 5-day forecast to 7-day forecast (limitation through API Token)
+
+
+## Additional Information
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
